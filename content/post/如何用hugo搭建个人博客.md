@@ -48,5 +48,6 @@ draft: false
    hugo server -D
    ```
   默认在 http://localhost:1313 中显示。
-   
+
+  一个简单的hugo博客就搭建完成了，可以开始写自己的博客啦！ 
   
