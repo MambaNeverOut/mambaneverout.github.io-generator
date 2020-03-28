@@ -44,6 +44,7 @@ draft: false
      ```
 
 2. class
+
    ```
    class Parent{
        constructor(name1){
@@ -63,5 +64,48 @@ draft: false
        }
    }
    ```
-   构造函数中使用的 super() 只能在构造函数中使用，并且必须在使用 this 关键字前调用。不调用的话执行函数会报错。
-   ![](/images/class-error.jpg)
+
+   - 构造函数中使用的 super() 只能在构造函数中使用，并且必须在使用 this 关键字前调用。不调用的话执行函数会报错。
+     ![](/images/class-error.jpg)
+
+3. Mixin(混入)
+
+   - 通过不使用继承的方式让一个类中的方法被其他类复用
+
+     ```
+       const mixin = (Base, mixins) => Object.assign(Base.prototype, mixins)
+       const Fly = {
+          canFly() { console.log('I can fly') }
+       }
+       class Mammal {
+          birthChild() { console.log('I birth a baby') }
+       }
+       mixin(Mammal, Fly)
+
+       let m = new Mammal()
+       m.birthChild()
+       m.canFly()
+     ```
+
+   - 变异版(使用继承实现，只是感觉更像混入)
+
+     ```
+      const FlyMixin = Base => class extends Base {
+          canFly() { console.log('I can fly') }
+      }
+      const SwimMixin = Base => class extends Base {
+          canSwim() { console.log('I can swim') }
+      }
+      class Mammal {
+          birthChild() { console.log('I birth a baby') }
+      }
+
+      const FlyMammal = FlyMixin(Mammal)
+      let m1 = new FlyMammal()
+      m1.canFly()
+
+      const FlySwimMammal = SwimMixin(FlyMixin(Mammal))
+      let m2 = new FlySwimMammal()
+      m2.canFly()
+      m2.canSwim()
+     ```

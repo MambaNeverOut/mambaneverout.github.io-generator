@@ -29,6 +29,25 @@ draft: false
    }
    ```
 
+   ```
+   for(var i = 0; i<6; i++){
+      let j = i
+      setTimeout(()=>{
+        console.log(j)
+      },0)
+   }
+   ```
+
+   ```
+   for(let i = 0; i<6; i++){
+     !function(j){
+       setTimeout(()=>{
+         console.log(j)
+       },0)
+     }(i)
+   }
+   ```
+
 3. 函数的要素
    - 调用时机
    - 作用域
